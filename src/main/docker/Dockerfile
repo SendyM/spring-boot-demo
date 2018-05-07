@@ -9,7 +9,7 @@ RUN mkdir /home/git; \
     #mkdir build; \
     #cd build; \
     #cmake -DCMAKE_BUILD_TYPE=Release ../; \
-    make
+    #make
 
 RUN mvn clean;\
     mvn package;
