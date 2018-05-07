@@ -1,9 +1,6 @@
 FROM frolvlad/alpine-oraclejdk8
 VOLUME /tmp
 MAINTAINER lovelysendy <daijkl@qq.com>
-RUN apt-get update; \
-    apt-get -y upgrade
-#RUN apt-get -y install g++ cmake git subversion
 
 RUN mkdir /home/git; \
     cd /home/git; \
