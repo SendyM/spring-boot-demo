@@ -6,10 +6,6 @@ RUN mkdir /home/git; \
     cd /home/git; \
     sudo git clone https://github.com/SendyM/spring-boot-demo.git -b master; \
     cd spring-boot-demo; \
-    #mkdir build; \
-    #cd build; \
-    #cmake -DCMAKE_BUILD_TYPE=Release ../; \
-    #make
 
 RUN mvn clean;\
     mvn package;
