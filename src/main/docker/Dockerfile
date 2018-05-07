@@ -1,4 +1,5 @@
 FROM frolvlad/alpine-oraclejdk8
+
 VOLUME /tmp
 ADD spring-boot-demo-1.0.1.jar app.jar
 RUN sh -c 'touch /app.jar'
