@@ -5,7 +5,7 @@
 
 	<groupId>com.example</groupId>
 	<artifactId>spring-boot-demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>spring-boot-demo</name>
@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<docker.image.prefix>lovelysendy</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -42,6 +43,34 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.13</version>
+				<configuration>
+					<baseImage>frolvlad/alpine-oraclejdk8</baseImage>
+					<imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
+					<dockerDirectory>src/main/docker</dockerDirectory>
+					<dockerHost>http://192.168.92.128:4232</dockerHost>
+					<!-- optionally overwrite tags every time image is built with docker:build -->
+					<forceTags>true</forceTags>
+					<imageTags>
+						<imageTag>${project.version}</imageTag>
+					</imageTags>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					<!-- 以下两行是为了docker push到DockerHub使用的。 -->
+					<serverId>docker-hub</serverId>
+					<registryUrl>https://index.docker.io/v1/</registryUrl>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
