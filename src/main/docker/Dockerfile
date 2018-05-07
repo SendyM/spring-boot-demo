@@ -6,9 +6,9 @@ RUN mkdir /home/git; \
     cd /home/git; \
     sudo git clone https://github.com/SendyM/spring-boot-demo.git -b master; \
     cd spring-boot-demo; \
-
-RUN mvn clean;\
+    mvn clean;\
     mvn package;
+
 ADD spring-boot-demo-1.0.1.jar app.jar
 
 RUN sh -c 'touch /app.jar'
